@@ -16,6 +16,6 @@ setup(name                  = 'PI_build',
       maintainer_email      = "jgill@parallax-innovations.com",
       requires              = ['dulwich'],
       url                   = "http://www.parallax-innovations.com",
-      packages              = ['PI_Build'],
+      packages              = ['PI_build'],
       long_description      = "Parallax Innovations Build scripts",
      )
