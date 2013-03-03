@@ -40,7 +40,6 @@ def get_version_strings(_dir):
 
     info.PACKAGE_SHA1 = r.get_refs()['HEAD']
 
-    tags = r.refs.subkeys('refs/tags')
     sha1_to_tag = {}
     for entry in r.get_refs():
         if 'tags' in entry:
