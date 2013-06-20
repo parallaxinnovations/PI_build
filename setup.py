@@ -2,8 +2,6 @@
 # Copyright (c) 2011-2013 Parallax Innovations Inc.
 # =========================================================================
 
-import sys, os
-
 from distutils.core import setup
 
 setup(name                  = 'PI_build',
