@@ -8,10 +8,9 @@ from PI_build import build_tools
 
 _dir = os.path.dirname(__file__)
 info = build_tools.get_version_strings(_dir)
-print info
 
 setup(name='PI_build',
-      version='0.0.1',
+      version=info.VERSION,
       license="Commercial",
       description="Parallax Innovations Build scripts",
       author="Jeremy D. Gill",
