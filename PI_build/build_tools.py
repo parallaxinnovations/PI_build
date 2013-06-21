@@ -63,6 +63,7 @@ class PIVersionInfo(object):
         self.SHORT_SHA1 = ''
         self.FULL_VERSION = ''
         self.VERSION = ''
+        self.SHORT_VERSION = ''
         self.MAINTAINER = "Jeremy Gill"
         self.MAINTAINER_EMAIL = "jgill@parallax-innovations.com"
 
@@ -85,6 +86,7 @@ class PIVersionInfo(object):
             'SHORT_SHA1': self.SHORT_SHA1,
             'FULL_VERSION': self.FULL_VERSION,
             'VERSION': self.VERSION,
+            'SHORT_VERSION': self.SHORT_VERSION,
             'MAINTAINER': self.MAINTAINER,
             'MAINTAINER_EMAIL': self.MAINTAINER_EMAIL,
         }
@@ -138,5 +140,6 @@ def get_version_strings(_dir):
     info.FULL_VERSION = git_version
     info.VERSION = '%s.%s.%s-%s' % (info.VER_PRODUCT_MAJOR, info.VER_PRODUCT_MINOR, info.VER_PRODUCT_REVISION,
                                     info.VER_PRODUCT_BUILD)
+    info.SHORT_VERSION = '%s.%s.%s' % (info.VER_PRODUCT_MAJOR, info.VER_PRODUCT_MINOR, info.VER_PRODUCT_REVISION)
 
     return info

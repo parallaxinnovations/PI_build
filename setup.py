@@ -10,7 +10,7 @@ _dir = os.path.dirname(__file__)
 info = build_tools.get_version_strings(_dir)
 
 setup(name='PI_build',
-      version=info.VERSION,
+      version=info.SHORT_VERSION,
       license="Commercial",
       description="Parallax Innovations Build scripts",
       author="Jeremy D. Gill",
