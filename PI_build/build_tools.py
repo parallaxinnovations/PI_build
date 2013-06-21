@@ -18,8 +18,22 @@ class PIVersionInfo(object):
         self.FULL_VERSION         = ''
         self.VERSION              = ''
         self.MAINTAINER           = "Jeremy Gill"
-        self.MAINTAINER_EMAIL = "jgill@parallax-innovations.com"
+        self.MAINTAINER_EMAIL     = "jgill@parallax-innovations.com"
 
+    def get_dictionary(self):
+    
+        return {
+            'VER_PRODUCT_MAJOR': self.VER_PRODUCT_MAJOR,
+            'VER_PRODUCT_MINOR': self.VER_PRODUCT_MINOR,
+            'VER_PRODUCT_REVISION': self.VER_PRODUCT_REVISION,
+            'VER_PRODUCT_BUILD': self.VER_PRODUCT_BUILD,
+            'SHORT_SHA1': self.SHORT_SHA1,
+            'FULL_VERSION': self.FULL_VERSION,
+            'VERSION': self.VERSION,
+            'MAINTAINER': self.MAINTAINER,
+            'MAINTAINER_EMAIL': self.MAINTAINER_EMAIL,
+        }
+        
 def get_version_strings(_dir):
 
     '''
