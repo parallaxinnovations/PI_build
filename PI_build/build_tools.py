@@ -7,9 +7,51 @@ import re
 from dulwich.repo import Repo
 
 class PIVersionInfo(object):
+    """Encapsulates a project's version info.
 
+    Used internally - you shouldn't need to create one directly.
+
+    .. data:: VER_PRODUCT_MAJOR
+
+       The project's major version number
+
+    .. data:: VER_PRODUCT_MINOR
+
+       The project's minor version number
+
+
+    .. data:: VER_PRODUCT_REVISION
+
+       The project's revision number
+
+    .. data:: VER_PRODUCT_BUILD
+
+       The project's build number
+
+    .. data:: SHORT_SHA1
+
+       A shortened SHA1 digest representation for the software
+
+    .. data:: FULL_VERSION
+
+       The full version string
+
+    .. data:: VERSION
+
+       A shortened version string
+
+    .. data:: MAINTAINER
+
+       Name of the maintainer of the project
+
+    .. data:: MAINTAINER_EMAIL
+
+       E-mail of the maintainer
+    """
     def __init__(self):
-    
+    	"""Initialize the object with dummy values.
+
+        The default values are of limited value."""
         self.VER_PRODUCT_MAJOR    = '0'
         self.VER_PRODUCT_MINOR    = '0'
         self.VER_PRODUCT_REVISION = '0'
@@ -21,7 +63,15 @@ class PIVersionInfo(object):
         self.MAINTAINER_EMAIL     = "jgill@parallax-innovations.com"
 
     def get_dictionary(self):
-    
+    	"""Returns a dictionary of version info.
+
+        Call this method if you need to perform string replacements.  The contents
+        of the dictionary can be used for automatic string replacments, such as in
+        the following example::
+
+		"full_version = %(FULL_VERSION)s" % build_tools.PIVersionInfo().get_dictionary()
+
+	"""
         return {
             'VER_PRODUCT_MAJOR': self.VER_PRODUCT_MAJOR,
             'VER_PRODUCT_MINOR': self.VER_PRODUCT_MINOR,
@@ -37,7 +87,11 @@ class PIVersionInfo(object):
 def get_version_strings(_dir):
 
     '''
-    Returns a variety of git-related version strings
+    A global function that returns a :class:`PIVersionInfo` object, encapsulating your project's version info.
+
+    :param _dir: directory of the toplevel folder in your project.  :file:`.git` should be 
+                 found immediately below this directory.
+    :rtype: A :class:`PIVersionInfo` object.
     '''
     info = PIVersionInfo()
 

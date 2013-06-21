@@ -3,9 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to PI_build documentation!
-==================================
-
+PI_build Docs
+=============
 This python package contains tools to automatically maintain version info for your other python
 software packages that you keep in git repositories.  Tag your projects with names that look like
 ``vA.B.C``, and `PI_build` can be used to do the rest.  This package depends primarily on 
