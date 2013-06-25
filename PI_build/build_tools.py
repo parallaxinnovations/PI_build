@@ -4,6 +4,7 @@
 
 import os
 import re
+import logging
 from dulwich.repo import Repo
 from dulwich.errors import NotGitRepository
 
@@ -135,11 +136,13 @@ def get_version_strings(_dir):
                 break
         count += 1
 
-    info.VER_PRODUCT_MAJOR, info.VER_PRODUCT_MINOR, info.VER_PRODUCT_REVISION, info.VER_PRODUCT_BUILD, info.SHORT_SHA1 = re.compile(
-        'v([0-9]*).([0-9]*).([0-9]*)-([0-9]*)-(.*)').match(git_version).groups()
-    info.FULL_VERSION = git_version
-    info.VERSION = '%s.%s.%s-%s' % (info.VER_PRODUCT_MAJOR, info.VER_PRODUCT_MINOR, info.VER_PRODUCT_REVISION,
-                                    info.VER_PRODUCT_BUILD)
-    info.SHORT_VERSION = '%s.%s.%s' % (info.VER_PRODUCT_MAJOR, info.VER_PRODUCT_MINOR, info.VER_PRODUCT_REVISION)
-
+    try:
+        info.VER_PRODUCT_MAJOR, info.VER_PRODUCT_MINOR, info.VER_PRODUCT_REVISION, info.VER_PRODUCT_BUILD, info.SHORT_SHA1 = re.compile(
+            'v([0-9]*).([0-9]*).([0-9]*)-([0-9]*)-(.*)').match(git_version).groups()
+        info.FULL_VERSION = git_version
+        info.VERSION = '%s.%s.%s-%s' % (info.VER_PRODUCT_MAJOR, info.VER_PRODUCT_MINOR, info.VER_PRODUCT_REVISION,
+                                        info.VER_PRODUCT_BUILD)
+        info.SHORT_VERSION = '%s.%s.%s' % (info.VER_PRODUCT_MAJOR, info.VER_PRODUCT_MINOR, info.VER_PRODUCT_REVISION)
+    except:
+        logging.warning("No compatible tag defined")
     return info
