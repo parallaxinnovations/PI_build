@@ -1,6 +1,8 @@
 import os
 from .. import build_tools
 import pytest
+import py
+from dulwich.repo import Repo
 
 def test_basic():
     """Package import and basic usage"""
@@ -22,7 +24,7 @@ def test_basic():
     assert (info.MAINTAINER == 'Jeremy Gill')
 
     # make sure we can get the dictionary
-    vals = info.get_dictionary()
+    info.get_dictionary()
 
 def test_fail():
     """Point package at a wrong folder"""
@@ -30,4 +32,17 @@ def test_fail():
     _dir = os.path.join(os.path.dirname(__file__), '..', '..', '..')
 
     with pytest.raises(Exception):
+        build_tools.get_version_strings(_dir)
+
+def test_missing_label(tmpdir):
+    """Test git repository with incorrect label"""
+
+    # create a temp directory
+    _dir = str(tmpdir.mkdir("repo"))
+
+    # initialize a git repo here
+    Repo.init(_dir)
+
+    # test for failure
+    with pytest.raises(KeyError):
         info = build_tools.get_version_strings(_dir)
