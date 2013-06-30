@@ -8,6 +8,13 @@ import logging
 from dulwich.repo import Repo
 from dulwich.errors import NotGitRepository
 
+class NoCompatibleTagDefined(Exception):
+    """Raised when there are not correctly formatted tags in the git repository.
+
+    At least one tag of the form v0.0.0 should be defined.
+    """
+    pass
+
 
 class PIVersionInfo(object):
     """Encapsulates a project's version info.
@@ -62,7 +69,7 @@ class PIVersionInfo(object):
         self.VER_PRODUCT_REVISION = '0'
         self.VER_PRODUCT_BUILD = '1'
         self.SHORT_SHA1 = ''
-        self.FULL_VERSION = ''
+        self.FULL_VERSION = '0.0.0'
         self.VERSION = ''
         self.SHORT_VERSION = ''
         self.MAINTAINER = "Jeremy Gill"
@@ -144,5 +151,8 @@ def get_version_strings(_dir):
                                         info.VER_PRODUCT_BUILD)
         info.SHORT_VERSION = '%s.%s.%s' % (info.VER_PRODUCT_MAJOR, info.VER_PRODUCT_MINOR, info.VER_PRODUCT_REVISION)
     except:
-        logging.warning("No compatible tag defined")
+        msg = "No compatible tag defined"
+        logging.warning(msg)
+        raise NoCompatibleTagDefined(msg)
+
     return info

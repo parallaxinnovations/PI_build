@@ -2,7 +2,7 @@ import os
 from .. import build_tools
 import pytest
 import py
-from dulwich.repo import Repo
+from dulwich.repo import Repo, Tag
 
 def test_basic():
     """Package import and basic usage"""
@@ -41,8 +41,39 @@ def test_missing_label(tmpdir):
     _dir = str(tmpdir.mkdir("repo"))
 
     # initialize a git repo here
-    Repo.init(_dir)
+    repo = Repo.init(_dir)
+
+    # put in some content
+    repo.do_commit('test commit', committer='anonymous <anonymous@anonymous.com>')
 
     # test for failure
-    with pytest.raises(KeyError):
+    with pytest.raises(build_tools.NoCompatibleTagDefined):
         info = build_tools.get_version_strings(_dir)
+
+def test_correct_label(tmpdir):
+    """Test git repository with a correct label"""
+
+    # create a temp directory
+    _dir = str(tmpdir.mkdir("repo"))
+
+    # initialize a git repo here
+    repo = Repo.init(_dir)
+
+    # put in some content
+    repo.do_commit('test commit', committer='anonymous <anonymous@anonymous.com>')
+    commit = repo.get_object(repo.head())
+
+    # tag it
+    tag = Tag()
+    tag.tagger = 'anonymous <anonymous@anonymous.com>'
+    tag.message = 'version 1.2.3 released'
+    tag.name = 'v1.2.3'
+    tag.object = (commit, commit.id)
+    tag.tag_time = commit.author_time
+    tag._tag_timezone = 0
+    repo.object_store.add_object(tag)
+    repo['refs/tags/' + tag.name] = commit.id
+
+    # test for failure
+    #with pytest.raises(build_tools.NoCompatibleTagDefined):
+    info = build_tools.get_version_strings(_dir)
