@@ -1,7 +1,6 @@
 import os
 from .. import build_tools
 import pytest
-import py
 from tempdir import TempDir
 from dulwich.repo import Repo, Tag
 
