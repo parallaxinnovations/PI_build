@@ -2,6 +2,7 @@ import os
 from .. import build_tools
 import pytest
 import py
+from tempdir import TempDir
 from dulwich.repo import Repo, Tag
 
 def test_basic():
@@ -26,6 +27,7 @@ def test_basic():
     # make sure we can get the dictionary
     info.get_dictionary()
 
+
 def test_fail():
     """Point package at a wrong folder"""
 
@@ -34,46 +36,45 @@ def test_fail():
     with pytest.raises(Exception):
         build_tools.get_version_strings(_dir)
 
-def test_missing_label(tmpdir):
+
+def test_missing_label():
     """Test git repository with incorrect label"""
 
-    # create a temp directory
-    _dir = str(tmpdir.mkdir("repo"))
+    with TempDir() as _dir:
 
-    # initialize a git repo here
-    repo = Repo.init(_dir)
+        # initialize a git repo here
+        repo = Repo.init(_dir.name)
 
-    # put in some content
-    repo.do_commit('test commit', committer='anonymous <anonymous@anonymous.com>')
+        # put in some content
+        repo.do_commit('test commit', committer='anonymous <anonymous@anonymous.com>')
 
-    # test for failure
-    with pytest.raises(build_tools.NoCompatibleTagDefined):
-        info = build_tools.get_version_strings(_dir)
+        # test for failure
+        with pytest.raises(build_tools.NoCompatibleTagDefined):
+            info = build_tools.get_version_strings(_dir.name)
 
-def test_correct_label(tmpdir):
+
+def test_correct_label():
     """Test git repository with a correct label"""
 
-    # create a temp directory
-    _dir = str(tmpdir.mkdir("repo"))
+    with TempDir() as _dir:
 
-    # initialize a git repo here
-    repo = Repo.init(_dir)
+        # initialize a git repo here
+        repo = Repo.init(_dir.name)
 
-    # put in some content
-    repo.do_commit('test commit', committer='anonymous <anonymous@anonymous.com>')
-    commit = repo.get_object(repo.head())
+        # put in some content
+        repo.do_commit('test commit', committer='anonymous <anonymous@anonymous.com>')
+        commit = repo.get_object(repo.head())
 
-    # tag it
-    tag = Tag()
-    tag.tagger = 'anonymous <anonymous@anonymous.com>'
-    tag.message = 'version 1.2.3 released'
-    tag.name = 'v1.2.3'
-    tag.object = (commit, commit.id)
-    tag.tag_time = commit.author_time
-    tag._tag_timezone = 0
-    repo.object_store.add_object(tag)
-    repo['refs/tags/' + tag.name] = commit.id
+        # tag it
+        tag = Tag()
+        tag.tagger = 'anonymous <anonymous@anonymous.com>'
+        tag.message = 'version 1.2.3 released'
+        tag.name = 'v1.2.3'
+        tag.object = (commit, commit.id)
+        tag.tag_time = commit.author_time
+        tag._tag_timezone = 0
+        repo.object_store.add_object(tag)
+        repo['refs/tags/' + tag.name] = commit.id
 
-    # test for failure
-    #with pytest.raises(build_tools.NoCompatibleTagDefined):
-    info = build_tools.get_version_strings(_dir)
+        info = build_tools.get_version_strings(_dir.name)
+        assert(info.SHORT_VERSION == '1.2.3')
