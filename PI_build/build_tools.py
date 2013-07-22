@@ -102,6 +102,7 @@ class PIVersionInfo(object):
             'SHORT_VERSION': self.SHORT_VERSION,
             'MAINTAINER': self.MAINTAINER,
             'MAINTAINER_EMAIL': self.MAINTAINER_EMAIL,
+            'TAG': self.TAG[self.TAG.find('-')+1:]
         }
 
 
