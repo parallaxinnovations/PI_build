@@ -57,6 +57,10 @@ class PIVersionInfo(object):
     .. data:: MAINTAINER_EMAIL
 
        E-mail of the maintainer
+
+    .. data:: TAG
+    
+       Closest tag name
     """
 
     def __init__(self):
@@ -71,6 +75,7 @@ class PIVersionInfo(object):
         self.SHORT_SHA1 = ''
         self.FULL_VERSION = '0.0.0'
         self.VERSION = ''
+        self.TAG = ''
         self.SHORT_VERSION = ''
         self.MAINTAINER = "Jeremy Gill"
         self.MAINTAINER_EMAIL = "jgill@parallax-innovations.com"
@@ -137,6 +142,9 @@ def get_version_strings(_dir):
     for walker in r.get_walker():
         commit = walker.commit
         if commit.id in sha1_to_tag:
+            # first match is closest tag
+            if info.TAG == '':
+                info.TAG = sha1_to_tag[commit.id]
             # verify that tag conforms to our needs
             if ex.match(sha1_to_tag[commit.id]):
                 git_version = '%s-%d-g%s' % (sha1_to_tag[commit.id], count, r.head()[0:7])
