@@ -3,6 +3,7 @@
 #####################################
 
 import os
+import pprint
 import re
 import logging
 from dulwich.repo import Repo
@@ -79,6 +80,9 @@ class PIVersionInfo(object):
         self.SHORT_VERSION = ''
         self.MAINTAINER = "Jeremy Gill"
         self.MAINTAINER_EMAIL = "jgill@parallax-innovations.com"
+
+    def __str__(self):
+        return pprint.pformat(vars(self))
 
     def get_dictionary(self):
         """Returns a dictionary of version info.
