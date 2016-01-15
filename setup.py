@@ -4,13 +4,12 @@
 
 import os
 from distutils.core import setup
-from PI_build import build_tools
 
-_dir = os.path.dirname(__file__)
-info = build_tools.get_version_strings(_dir)
+# do it using git here to avoid depending on dulwich at this point
+version = os.popen('git describe --tags').read().strip().replace('v','')
 
 setup(name='PI_build',
-      version=info.SHORT_VERSION,
+      version=version,
       license="Commercial",
       description="Parallax Innovations Build scripts",
       author="Jeremy D. Gill",
@@ -18,7 +17,6 @@ setup(name='PI_build',
       maintainer="Jeremy D. Gill",
       maintainer_email="jgill@parallax-innovations.com",
       requires=['dulwich'],
-      install_requires=['dulwich'],
       url="http://www.parallax-innovations.com",
       packages=['PI_build'],
       long_description="Parallax Innovations Build scripts",
