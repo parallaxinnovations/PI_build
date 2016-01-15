@@ -4,9 +4,14 @@
 
 import os
 from distutils.core import setup
+from pip.req import parse_requirements
+from pip.download import PipSession
 
 # do it using git here to avoid depending on dulwich at this point
 version = os.popen('git describe --tags').read().strip().replace('v','')
+
+install_reqs = parse_requirements("requirements.txt", session=PipSession())
+reqs = [str(ir.req) for ir in install_reqs]
 
 setup(name='PI_build',
       version=version,
@@ -16,7 +21,7 @@ setup(name='PI_build',
       author_email="jgill@parallax-innovations.com",
       maintainer="Jeremy D. Gill",
       maintainer_email="jgill@parallax-innovations.com",
-      requires=['dulwich'],
+      requires=reqs,
       url="http://www.parallax-innovations.com",
       packages=['PI_build'],
       long_description="Parallax Innovations Build scripts",
