@@ -1,5 +1,5 @@
 # =========================================================================
-# Copyright (c) 2011-2015 Parallax Innovations Inc.
+# Copyright (c) 2011-2016 Parallax Innovations Inc.
 # =========================================================================
 
 import os
@@ -18,6 +18,7 @@ setup(name='PI_build',
       maintainer="Jeremy D. Gill",
       maintainer_email="jgill@parallax-innovations.com",
       requires=['dulwich'],
+      install_requires=['dulwich'],
       url="http://www.parallax-innovations.com",
       packages=['PI_build'],
       long_description="Parallax Innovations Build scripts",

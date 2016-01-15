@@ -131,14 +131,13 @@ def get_version_strings(_dir):
                 _dir = _dir2
             else:
                 raise Exception("Unable to find git repository")
-
-    info.PACKAGE_SHA1 = r.get_refs()['HEAD']
+    info.PACKAGE_SHA1 = r.get_refs()[b'HEAD']
 
     sha1_to_tag = {}
     for entry in r.get_refs():
-        if 'tags' in entry:
+        if 'tags' in entry.decode('utf-8'):
             sha1 = r.get_refs()[entry]
-            sha1_to_tag[sha1] = entry.replace('refs/tags/', '')
+            sha1_to_tag[sha1] = entry.decode('utf-8').replace('refs/tags/', '')
 
     count = 0
     ex = re.compile('v[0-9]*\.[0-9]*\.[0-9]*$')
