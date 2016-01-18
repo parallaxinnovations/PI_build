@@ -132,6 +132,8 @@ def get_version_strings(_dir):
             else:
                 raise Exception("Unable to find git repository")
     info.PACKAGE_SHA1 = r.get_refs()[b'HEAD']
+    if isinstance(info.PACKAGE_SHA1, bytes):
+        info.PACKAGE_SHA1 = info.PACKAGE_SHA1.decode('utf-8')
 
     sha1_to_tag = {}
     for entry in r.get_refs():
