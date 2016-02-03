@@ -3,11 +3,16 @@
 #####################################
 
 import os
+import sys
+import pickle
 import pprint
 import re
 import logging
 from dulwich.repo import Repo
 from dulwich.errors import NotGitRepository
+import psutil
+
+logger = logging.getLogger(__name__)
 
 class NoCompatibleTagDefined(Exception):
     """Raised when there are not correctly formatted tags in the git repository.
@@ -121,6 +126,13 @@ def get_version_strings(_dir):
     info = PIVersionInfo()
     r = None
 
+    # pip hack - if we detect that we're being run as part of 'python setup.py egg_info' command
+    # we assume we're being run in a temporary directory (pip copies code which makes it difficult
+    # to determine where .git folder is).  We work around this by finding the working directory of
+    # our parent process
+    if 'egg_info' in sys.argv:
+        _dir = psutil.Process(psutil.Process(os.getpid()).ppid()).cwd()
+
     while True:
         try:
             r = Repo(_dir)
@@ -130,7 +142,12 @@ def get_version_strings(_dir):
             if _dir != _dir2:
                 _dir = _dir2
             else:
-                raise Exception("Unable to find git repository")
+                logger.error("Unable to find git repository - using cached info")
+                try:
+                    info = pickle.load(open(".cached-version-info", "rb"))
+                except:
+                    logging.error("Unable to load .cached-version-info file")
+                return info
     info.PACKAGE_SHA1 = r.get_refs()[b'HEAD']
     if isinstance(info.PACKAGE_SHA1, bytes):
         info.PACKAGE_SHA1 = info.PACKAGE_SHA1.decode('utf-8')
@@ -166,7 +183,12 @@ def get_version_strings(_dir):
         info.SHORT_VERSION = '%s.%s.%s' % (info.VER_PRODUCT_MAJOR, info.VER_PRODUCT_MINOR, info.VER_PRODUCT_REVISION)
     except:
         msg = "No compatible tag defined"
-        logging.warning(msg)
+        logger.warning(msg)
         raise NoCompatibleTagDefined(msg)
+
+    try:
+        pickle.dump(info, open(".cached-version-info", "wb"))
+    except:
+        logger.error("Unable to save .cached-version-info file")
 
     return info
