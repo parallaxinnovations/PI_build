@@ -131,7 +131,16 @@ def get_version_strings(_dir):
     # to determine where .git folder is).  We work around this by finding the working directory of
     # our parent process
     if 'egg_info' in sys.argv:
-        _dir = psutil.Process(psutil.Process(os.getpid()).ppid()).cwd()
+        current_proc = psutil.Process(os.getpid())
+        if isinstance(current_proc.ppid, int):
+            ppid = current_proc.ppid
+        else:
+            ppid = current_proc.ppid()
+        parent = psutil.Process(ppid)
+        if hasattr(parent, 'cwd'):
+            _dir = parent.cwd()
+        else:
+            _dir = parent.getcwd()
 
     while True:
         try:
