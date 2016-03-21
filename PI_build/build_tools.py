@@ -12,7 +12,6 @@ from dulwich.repo import Repo
 from dulwich.errors import NotGitRepository
 import psutil
 
-logger = logging.getLogger(__name__)
 
 class NoCompatibleTagDefined(Exception):
     """Raised when there are not correctly formatted tags in the git repository.
@@ -151,7 +150,7 @@ def get_version_strings(_dir):
             if _dir != _dir2:
                 _dir = _dir2
             else:
-                logger.error("Unable to find git repository - using cached info")
+                logging.error("Unable to find git repository - using cached info")
                 try:
                     info = pickle.load(open(".cached-version-info", "rb"))
                 except:
@@ -192,12 +191,12 @@ def get_version_strings(_dir):
         info.SHORT_VERSION = '%s.%s.%s' % (info.VER_PRODUCT_MAJOR, info.VER_PRODUCT_MINOR, info.VER_PRODUCT_REVISION)
     except:
         msg = "No compatible tag defined"
-        logger.warning(msg)
+        logging.warning(msg)
         raise NoCompatibleTagDefined(msg)
 
     try:
         pickle.dump(info, open(".cached-version-info", "wb"))
     except:
-        logger.error("Unable to save .cached-version-info file")
+        logging.error("Unable to save .cached-version-info file")
 
     return info
