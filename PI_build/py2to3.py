@@ -6,8 +6,6 @@ from zipfile import ZipFile, ZIP_DEFLATED
 def rewrite_egg(egg_path):
     """Create an egg that works with MicroView in python3"""
 
-    egg_path = glob.glob(os.path.join('dist', '*.egg'))[0]
-
     RE_PYCACHE_FILE = re.compile('(.+/)__pycache__/(.+)\.cpython-3\d(.+)(.pyc|.pyo)$')
 
     with tempfile.TemporaryDirectory() as tmpdir:
