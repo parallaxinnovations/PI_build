@@ -178,7 +178,7 @@ def get_version_strings(_dir):
                 info.TAG = sha1_to_tag[commit.id]
             # verify that tag conforms to our needs
             if ex.match(sha1_to_tag[commit.id]):
-                git_version = '%s-%d-g%s' % (sha1_to_tag[commit.id], count, r.head()[0:7])
+                git_version = '%s-%d-g%s' % (sha1_to_tag[commit.id], count, r.head().decode()[0:7])
                 break
         count += 1
 
