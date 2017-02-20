@@ -1,8 +1,9 @@
 # =========================================================================
-# Copyright (c) 2011-2016 Parallax Innovations Inc.
+# Copyright (c) 2011-2017 Parallax Innovations Inc.
 # =========================================================================
 
 import os
+import sys
 from setuptools import setup
 from pip.req import parse_requirements
 from pip.download import PipSession
@@ -12,6 +13,10 @@ version = os.popen('git describe --tags').read().strip().replace('v','')
 
 install_reqs = parse_requirements("requirements.txt", session=PipSession())
 reqs = [str(ir.req) for ir in install_reqs]
+
+# add a few more requirements
+if sys.platform == 'win32':
+    reqs.extend(['pefile'])
 
 setup(name='PI_build',
       version=version,
