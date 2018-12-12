@@ -5,8 +5,12 @@
 import os
 import sys
 from setuptools import setup
-from pip.req import parse_requirements
-from pip.download import PipSession
+try:
+    from pip._internal.req.req_file import parse_requirements
+    from pip._internal.download import PipSession
+except:
+    from pip.req import parse_requirements
+    from pip.download import PipSession
 
 # do it using git here to avoid depending on dulwich at this point
 version = os.popen('git describe --tags').read().strip().replace('v','')
