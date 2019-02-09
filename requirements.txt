@@ -1,4 +1,5 @@
 dulwich
 future
+pefile; sys_platform == 'win32'
 psutil
 tempdir
