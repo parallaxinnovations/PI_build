@@ -1,13 +1,15 @@
 import os
 import re
+import sys
 import tempfile
 from zipfile import ZipFile, ZIP_DEFLATED
 
 def rewrite_egg(egg_path):
     """Create an egg that works with MicroView in python3"""
 
-    RE_PYCACHE_FILE = re.compile('(.*/)__pycache__/(.+)\.cpython-3\d(.+)(.pyc|.pyo)$')
-    RE_PYCACHE_FILE2 = re.compile('__pycache__/(.+)\.cpython-3\d(.+)(.pyc|.pyo)$')
+    RE_PYCACHE_FILE3 = re.compile('(.*)\.cp3\d-(.*)(.pyd)$')
+
+    cache_tag = sys.implementation.cache_tag
 
     with tempfile.TemporaryDirectory() as tmpdir:
         names_lst = []
@@ -15,15 +17,12 @@ def rewrite_egg(egg_path):
         with ZipFile(egg_path, 'r') as zf:
             for name in zf.namelist():
 
-                if '__pycache__' in name:
-                    if name.startswith('__pycache__'):
-                        m = RE_PYCACHE_FILE2.match(name)
-                        w_name = m.group(1) + m.group(3)
-                    else:
-                        m = RE_PYCACHE_FILE.match(name)
-                        w_name = m.group(1) + m.group(2) + m.group(4)
-                else:
-                    w_name = name
+                w_name = name
+                w_name = w_name.replace('__pycache_/', '')
+                w_name = w_name.replace(cache_tag+'.', '')
+#                m = RE_PYCACHE_FILE3.match(w_name)
+#                if m:
+#                    w_name = m.groups()[0] + m.groups()[2]
 
                 w_path = os.path.join(tmpdir_abs_path, w_name)
                 dir_path = os.path.dirname(w_path)
