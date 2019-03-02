@@ -1,3 +1,4 @@
+from past.builtins import basestring
 import os
 from .. import build_tools
 import pytest
