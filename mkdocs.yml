@@ -1,7 +1,7 @@
 site_name: PI_build
 site_description: PI build Tools
 copyright: Copyright &copy; 2011-2019 Parallax Innovations
-site_url: http://microview.parallax-innovations.com
+site_url: https://parallaxinnovations.github.io/PI_build/
 repo_url: https://github.com/parallaxinnovations/PI_build
 google_analytics: ['UA-24513701-2', 'parallax-innovations.com']
 theme:
@@ -36,7 +36,7 @@ extra:
   manifest: 'manifest.webmanifest'
   social:
     - type: 'github'
-      link: 'https://github.com/parallaxinnovations/MicroView'
+      link: 'https://github.com/parallaxinnovations/'
     - type: 'twitter'
       link: 'https://twitter.com/parallaxinnovat'
     - type: 'linkedin'
