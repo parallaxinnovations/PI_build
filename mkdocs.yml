@@ -1,0 +1,52 @@
+site_name: PI_build
+site_description: PI build Tools
+copyright: Copyright &copy; 2011-2019 Parallax Innovations
+site_url: http://microview.parallax-innovations.com
+repo_url: https://github.com/parallaxinnovations/pi_build
+google_analytics: ['UA-24513701-2', 'parallax-innovations.com']
+theme:
+  name: material
+  favicon: 'images/parallax-favico.ico'
+  logo: 'svg/parallax-logo.svg'
+
+extra_css:
+  - css/extra.css
+
+markdown_extensions:
+  - attr_list
+  - fontawesome_markdown
+  - admonition
+  - codehilite
+  - pymdownx.arithmatex
+  - pymdownx.keys
+  - pymdownx.smartsymbols
+  - pymdownx.emoji
+  - meta
+  - markdown.extensions.extra
+
+#plugins:
+#  - search
+#  - pdf-export:
+#      combined: true
+
+extra_javascript:
+  - 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML'
+
+extra:
+  manifest: 'manifest.webmanifest'
+  social:
+    - type: 'github'
+      link: 'https://github.com/parallaxinnovations/MicroView'
+    - type: 'twitter'
+      link: 'https://twitter.com/parallaxinnovat'
+    - type: 'linkedin'
+      link: 'https://www.linkedin.com/company/parallax-innovations'
+    - type: 'google-plus-square'
+      link: 'https://plus.google.com/+Parallax-innovations'
+
+nav:
+    - Overview: index.md
+    - Changelog: changelog.md
+    - Installation: install.md
+    - Usage: usage.md
+#    - Classes: classes.md
