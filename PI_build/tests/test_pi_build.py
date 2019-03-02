@@ -28,14 +28,6 @@ def test_basic():
     info.get_dictionary()
 
 
-#def test_fail():
-#    """Point package at a wrong folder"""
-#
-#    _dir = os.path.join(os.path.dirname(__file__), '..', '..', '..')
-#    with pytest.raises(Exception):
-#        build_tools.get_version_strings(_dir)
-
-
 def test_missing_label():
     """Test git repository with incorrect label"""
 
@@ -45,7 +37,7 @@ def test_missing_label():
         repo = Repo.init(_dir)
 
         # put in some content
-        repo.do_commit('test commit', committer='anonymous <anonymous@anonymous.com>')
+        repo.do_commit(b'test commit', committer=b'anonymous <anonymous@anonymous.com>')
 
         # test for failure
         with pytest.raises(build_tools.NoCompatibleTagDefined):
@@ -61,7 +53,7 @@ def test_correct_label():
         repo = Repo.init(_dir)
 
         # put in some content
-        repo.do_commit('test commit', committer='anonymous <anonymous@anonymous.com>')
+        repo.do_commit(b'test commit', committer=b'anonymous <anonymous@anonymous.com>')
         commit = repo.get_object(repo.head())
 
         # tag it
