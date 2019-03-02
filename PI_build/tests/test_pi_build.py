@@ -65,7 +65,7 @@ def test_correct_label():
         tag.tag_time = commit.author_time
         tag._tag_timezone = 0
         repo.object_store.add_object(tag)
-        repo['refs/tags/' + tag.name] = commit.id
+        repo[b'refs/tags/' + tag.name] = commit.id
 
         info = build_tools.get_version_strings(_dir)
         assert(info.SHORT_VERSION == '1.2.3')
