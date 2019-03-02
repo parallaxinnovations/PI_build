@@ -27,7 +27,7 @@ if sys.platform == 'win32':
 
 setup(name='PI_build',
       version=version,
-      license="Commercial",
+      license="BSD License",
       description="Parallax Innovations Build scripts",
       author="Jeremy D. Gill",
       author_email="jgill@parallax-innovations.com",
