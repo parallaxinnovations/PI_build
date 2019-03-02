@@ -167,7 +167,7 @@ def get_version_strings(_dir):
             sha1_to_tag[sha1] = entry.decode('utf-8').replace('refs/tags/', '')
 
     count = 0
-    ex = re.compile('v[0-9]*\.[0-9]*\.[0-9]*$')
+    ex = re.compile(r'v[0-9]*\.[0-9]*\.[0-9]*$')
     git_version = 'v1.0.0-g0000'
 
     for walker in r.get_walker():
