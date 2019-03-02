@@ -1,5 +1,3 @@
 dulwich
-future
 pefile; sys_platform == 'win32'
 psutil
-tempdir >= 0.7.1
