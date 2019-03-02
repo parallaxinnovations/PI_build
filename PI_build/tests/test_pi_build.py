@@ -58,9 +58,9 @@ def test_correct_label():
 
         # tag it
         tag = Tag()
-        tag.tagger = 'anonymous <anonymous@anonymous.com>'
-        tag.message = 'version 1.2.3 released'
-        tag.name = 'v1.2.3'
+        tag.tagger = b'anonymous <anonymous@anonymous.com>'
+        tag.message = b'version 1.2.3 released'
+        tag.name = b'v1.2.3'
         tag.object = (commit, commit.id)
         tag.tag_time = commit.author_time
         tag._tag_timezone = 0
