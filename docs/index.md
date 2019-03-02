@@ -1,6 +1,6 @@
 # PI_build Docs
 
-[PI_build](.) contains tools to automatically maintain version info for python
+[PI_build](index.md) contains tools to automatically maintain version info for python
 software packages that are kept in git repositories.  This project predominantly exists to aid
 in packaging [MicroView](http://microview.parallax-innovations.com) but may be useful for other purposes as well.
 
