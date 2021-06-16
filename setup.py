@@ -1,5 +1,5 @@
 # =========================================================================
-# Copyright (c) 2011-2019 Parallax Innovations Inc.
+# Copyright (c) 2011-2021 Parallax Innovations Inc.
 # =========================================================================
 
 import os
@@ -14,6 +14,11 @@ except:
 
 # do it using git here to avoid depending on dulwich at this point
 version = os.popen('git describe --tags').read().strip().replace('v','')
+
+# PEP-440
+if "-" in version:
+  version = version.split("-")[0]
+  version = version + "dev0"
 
 reqs = [
     'dulwich',
