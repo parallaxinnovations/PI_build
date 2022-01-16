@@ -1,16 +1,17 @@
 { pkgs, buildPythonPackage, packages }:
 buildPythonPackage rec {
   pname = "PI_build";
-  version = "0.1.3-55";
+  version = "0.1.4";
 
   src = fetchGit {
     url = "ssh://git@bitbucket.org/jgill72/PI_build.git";
-    rev = "86c7cf49a956d093223654493791a99ba4eb2e6f";
+    rev = "2682aae54389f7d093c0c274491ef850895fd406";
     allRefs = true;
   };
 
   preBuild = ''
-    export PACKAGE_VERSION="0.1.3"
+    echo '__version__ = "${version}"' > PI_build/__init__.py
+    export PACKAGE_VERSION="${version}"
   '';
 
   nativeBuildInputs = [
