@@ -1,5 +1,4 @@
-{ pkgs ? import <nixpkgs> {} }: 
-with pkgs.python39Packages;
+{ pkgs, buildPythonPackage, packages }:
 buildPythonPackage rec {
   pname = "PI_build";
   version = "0.1.3-51-g24831f9";
@@ -11,25 +10,25 @@ buildPythonPackage rec {
   };
 
   nativeBuildInputs = [
-    pip
+    packages.pip
     pkgs.git
-    dulwich
-    psutil
+    packages.dulwich
+    packages.psutil
   ];
 
   doCheck = false;
 
   buildInputs = [
-    dulwich
-    pip
-    psutil
-    setuptools
+    packages.dulwich
+    packages.pip
+    packages.psutil
+    packages.setuptools
     pkgs.git
   ];
 
   propagatedBuildInputs = [
-    dulwich
-    psutil
+    packages.dulwich
+    packages.psutil
   ];
 
   meta = with pkgs.lib; {
