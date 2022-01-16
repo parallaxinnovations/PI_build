@@ -33,9 +33,9 @@ buildPythonPackage rec {
   ];
 
   meta = with pkgs.lib; {
-    description = "A Python wrapper around the Twitter API";
-    homepage = "https://github.com/bear/python-twitter";
-    license = licenses.asl20;
-    maintainers = [ maintainers.marsam ];
+    description = "Parallax Innovations Build scripts";
+    homepage = "http://www.parallax-innovations.com";
+    license = licenses.bsd3;
+    maintainers = [ "Jeremy Gill <jgill@parallax-innovations.com>" ];
   };
 }
