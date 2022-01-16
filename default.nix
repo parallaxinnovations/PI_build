@@ -11,7 +11,10 @@ buildPythonPackage rec {
   };
 
   nativeBuildInputs = [
+    pip
     pkgs.git
+    dulwich
+    psutil
   ];
 
   doCheck = false;
@@ -22,6 +25,11 @@ buildPythonPackage rec {
     psutil
     setuptools
     pkgs.git
+  ];
+
+  propagatedBuildInputs = [
+    dulwich
+    psutil
   ];
 
   meta = with pkgs.lib; {
