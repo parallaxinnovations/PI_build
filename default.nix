@@ -1,11 +1,11 @@
 { pkgs, buildPythonPackage, packages }:
 buildPythonPackage rec {
   pname = "PI_build";
-  version = "0.1.3-51-g24831f9";
+  version = "v0.1.3-55-g86c7cf4";
 
   src = fetchGit {
     url = "ssh://git@bitbucket.org/jgill72/PI_build.git";
-    rev = "24831f9e84f0d931fe8189088d70f9592a3f29c0";
+    rev = "86c7cf49a956d093223654493791a99ba4eb2e6f";
     allRefs = true;
   };
 
