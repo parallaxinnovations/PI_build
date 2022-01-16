@@ -12,16 +12,16 @@ except:
     from pip.req import parse_requirements
     from pip.download import PipSession
 
-if os.environ.get('NIX_VERSION'):
-    version = os.environ['NIX_VERSION']
+if os.environ.get('PACKAGE_VERSION'):
+    version = os.environ['PACKAGE_VERSION']
 else:
     # do it using git here to avoid depending on dulwich at this point
     version = os.popen('git describe --tags').read().strip().replace('v','')
 
-    # PEP-440
-    if "-" in version:
-        version = version.split("-")[0]
-        version = version + "dev0"
+# PEP-440
+if "-" in version:
+    version = version.split("-")[0]
+    version = version + "dev0"
 
 reqs = [
     'dulwich',
