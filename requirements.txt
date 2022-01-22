@@ -1,4 +1,4 @@
 dulwich
 pefile; sys_platform == 'win32'
 psutil
-pip==20.0.1
+pip==21.3.1

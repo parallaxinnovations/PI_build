@@ -1,7 +1,10 @@
-{ pkgs, buildPythonPackage, packages }:
+{ pkgs, packages }:
+with packages;
 buildPythonPackage rec {
   pname = "PI_build";
   version = "0.1.4";
+
+#  src = ./. ;
 
   src = fetchGit {
     url = "ssh://git@bitbucket.org/jgill72/PI_build.git";
@@ -15,25 +18,25 @@ buildPythonPackage rec {
   '';
 
   nativeBuildInputs = [
-    packages.pip
+    pip
     pkgs.git
-    packages.dulwich
-    packages.psutil
+    dulwich
+    psutil
   ];
 
   doCheck = false;
 
   buildInputs = [
-    packages.dulwich
-    packages.pip
-    packages.psutil
-    packages.setuptools
+    dulwich
+    pip
+    psutil
+    setuptools
     pkgs.git
   ];
 
   propagatedBuildInputs = [
-    packages.dulwich
-    packages.psutil
+    dulwich
+    psutil
   ];
 
   meta = with pkgs.lib; {
