@@ -5,7 +5,7 @@ buildPythonPackage rec {
 
   src = fetchGit {
     url = "ssh://git@bitbucket.org/jgill72/PI_build.git";
-    rev = "362c3057c4b2fde4dee4dc939dac4f575f0b7e0a";
+    rev = "24c52c13afcf992df13e02cdb4d1b5c40bf33589";
     allRefs = true;
   };
 
