@@ -3,7 +3,7 @@ Usage
 
 An example :file:`setup.py` file is listed below for demonstration purposes::
 
-	from distutils.core import setup
+	from setuptools import setup
 	from PI_build import build_tools
 
         # get the directory where our :file:``setup.py`` is
