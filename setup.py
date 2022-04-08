@@ -5,12 +5,6 @@
 import os
 import sys
 from setuptools import setup
-try:
-    from pip._internal.req.req_file import parse_requirements
-    from pip._internal.network.session import PipSession
-except:
-    from pip.req import parse_requirements
-    from pip.download import PipSession
 
 if os.environ.get('PACKAGE_VERSION'):
     version = os.environ['PACKAGE_VERSION']
