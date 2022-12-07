@@ -26,7 +26,7 @@ if sys.platform == 'win32':
     reqs.append('pefile')
 
 
-setup(name='PI_build',
+setup(name='pi-build',
       version=version,
       license="BSD License",
       description="Parallax Innovations Build scripts",
