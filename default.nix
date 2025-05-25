@@ -1,16 +1,10 @@
-{ pkgs, packages }:
-with packages;
+{ pkgs ? import <nixpkgs> {} }:
+with pkgs.python3Packages;
 buildPythonPackage rec {
   pname = "PI_build";
   version = "0.1.4";
 
-#  src = ./. ;
-
-  src = fetchGit {
-    url = "ssh://git@bitbucket.org/jgill72/PI_build.git";
-    rev = "ccc8e1bae9c63d2f937de4cdf6129b720a546460";
-    allRefs = true;
-  };
+  src = ./. ;
 
   preBuild = ''
     echo '__version__ = "${version}"' > PI_build/__init__.py
