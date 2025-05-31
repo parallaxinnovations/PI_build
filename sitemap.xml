@@ -1,23 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-     <loc>http://microview.parallax-innovations.com/</loc>
-     <lastmod>2019-03-02</lastmod>
-     <changefreq>daily</changefreq>
+         <loc>https://parallaxinnovations.github.io/PI_build/</loc>
+         <lastmod>1980-01-01</lastmod>
     </url>
     <url>
-     <loc>http://microview.parallax-innovations.com/changelog/</loc>
-     <lastmod>2019-03-02</lastmod>
-     <changefreq>daily</changefreq>
+         <loc>https://parallaxinnovations.github.io/PI_build/changelog/</loc>
+         <lastmod>1980-01-01</lastmod>
     </url>
     <url>
-     <loc>http://microview.parallax-innovations.com/install/</loc>
-     <lastmod>2019-03-02</lastmod>
-     <changefreq>daily</changefreq>
+         <loc>https://parallaxinnovations.github.io/PI_build/install/</loc>
+         <lastmod>1980-01-01</lastmod>
     </url>
     <url>
-     <loc>http://microview.parallax-innovations.com/usage/</loc>
-     <lastmod>2019-03-02</lastmod>
-     <changefreq>daily</changefreq>
+         <loc>https://parallaxinnovations.github.io/PI_build/usage/</loc>
+         <lastmod>1980-01-01</lastmod>
     </url>
 </urlset>

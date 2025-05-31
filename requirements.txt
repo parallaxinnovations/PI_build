@@ -1,0 +1,2 @@
+mkdocs-material[imaging]
+git+https://github.com/jordanauge/fontawesome-markdown.git@c00e2d0beb00f0e581b8a108e6205047e73dc492
