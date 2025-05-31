@@ -7,10 +7,10 @@ name = "pi-build"
 dynamic = ["version"]
 description = "Parallax Innovations Build scripts"
 authors = [
-    { name = "Jeremy D. Gill", email = "jgill@parallax-innovations.com" }
+    { name = "Jeremy Gill", email = "jgill@parallax-innovations.com" }
 ]
 maintainers = [
-    { name = "Jeremy D. Gill", email = "jgill@parallax-innovations.com" }
+    { name = "Jeremy Gill", email = "jgill@parallax-innovations.com" }
 ]
 license = { text = "BSD-3-Clause" }
 classifiers = [

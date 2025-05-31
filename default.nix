@@ -1,10 +1,11 @@
 { pkgs ? import <nixpkgs> {}, packages ? pkgs.python3Packages }:
 
 packages.buildPythonPackage rec {
-  pname = "PI_build";
-  version = "0.1.4";
+  pname = "pi-build";
+  version = "0.1.5";
 
   src = ./.;
+
   format = "pyproject";
 
   nativeBuildInputs = [
