@@ -1,6 +1,6 @@
 site_name: PI_build
 site_description: PI build Tools
-copyright: Copyright &copy; 2011-2019 Parallax Innovations
+copyright: Copyright &copy; 2011-2025 Parallax Innovations
 site_url: https://parallaxinnovations.github.io/PI_build/
 repo_url: https://github.com/parallaxinnovations/PI_build
 google_analytics: ['UA-24513701-2', 'parallax-innovations.com']
@@ -24,7 +24,8 @@ markdown_extensions:
   - meta
   - markdown.extensions.extra
 
-#plugins:
+plugins:
+  - social
 #  - search
 #  - pdf-export:
 #      combined: true
@@ -35,14 +36,12 @@ extra_javascript:
 extra:
   manifest: 'manifest.webmanifest'
   social:
-    - type: 'github'
+    - icon: fontawesome/brands/github
       link: 'https://github.com/parallaxinnovations/'
-    - type: 'twitter'
+    - icon: fontawesome/brands/x-twitter
       link: 'https://twitter.com/parallaxinnovat'
-    - type: 'linkedin'
+    - icon: fontawesome/brands/linkedin
       link: 'https://www.linkedin.com/company/parallax-innovations'
-    - type: 'google-plus-square'
-      link: 'https://plus.google.com/+Parallax-innovations'
 
 nav:
     - Overview: index.md
