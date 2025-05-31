@@ -1,0 +1,62 @@
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pi-build"
+dynamic = ["version"]
+description = "Parallax Innovations Build scripts"
+authors = [
+    { name = "Jeremy D. Gill", email = "jgill@parallax-innovations.com" }
+]
+maintainers = [
+    { name = "Jeremy D. Gill", email = "jgill@parallax-innovations.com" }
+]
+license = { text = "BSD-3-Clause" }
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: BSD License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Python :: Implementation :: PyPy",
+    "Operating System :: OS Independent",
+]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "dulwich",
+    "psutil",
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest",
+    "pytest-cov",
+    "tempdir>=0.7.1",
+    "future",
+    "codecov"
+]
+windows = [
+    "pefile"
+]
+
+[project.urls]
+Homepage = "https://parallaxinnovations.github.io/PI_build/"
+
+[tool.hatch.version]
+source = "vcs"
+tag-pattern = "v?(\\d+\\.\\d+\\.\\d+)"
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/PI_build",
+    "/docs",
+    "README.md",
+    "pyproject.toml"
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["PI_build"]

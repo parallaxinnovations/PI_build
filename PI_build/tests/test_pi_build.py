@@ -1,8 +1,7 @@
-from past.builtins import basestring
 import os
-from .. import build_tools
+from PI_build import build_tools
 import pytest
-from tempdir import TempDir
+from tempfile import TemporaryDirectory
 from dulwich.repo import Repo, Tag
 
 def test_basic():
@@ -12,17 +11,17 @@ def test_basic():
     info = build_tools.get_version_strings(_dir)
 
     # evaluate various types
-    assert (isinstance(info.VER_PRODUCT_MAJOR, basestring))
-    assert (isinstance(info.VER_PRODUCT_MINOR, basestring))
-    assert (isinstance(info.VER_PRODUCT_REVISION, basestring))
-    assert (isinstance(info.VER_PRODUCT_BUILD, basestring))
-    assert (isinstance(info.SHORT_SHA1, basestring))
-    assert (isinstance(info.FULL_VERSION, basestring))
-    assert (isinstance(info.VERSION, basestring))
-    assert (isinstance(info.SHORT_VERSION, basestring))
-    assert (isinstance(info.MAINTAINER, basestring))
-    assert (isinstance(info.MAINTAINER_EMAIL, basestring))
-    assert (info.MAINTAINER == 'Jeremy Gill')
+    assert isinstance(info.VER_PRODUCT_MAJOR, str)
+    assert isinstance(info.VER_PRODUCT_MINOR, str)
+    assert isinstance(info.VER_PRODUCT_REVISION, str)
+    assert isinstance(info.VER_PRODUCT_BUILD, str)
+    assert isinstance(info.SHORT_SHA1, str)
+    assert isinstance(info.FULL_VERSION, str)
+    assert isinstance(info.VERSION, str)
+    assert isinstance(info.SHORT_VERSION, str)
+    assert isinstance(info.MAINTAINER, str)
+    assert isinstance(info.MAINTAINER_EMAIL, str)
+    assert info.MAINTAINER == 'Jeremy Gill'
 
     # make sure we can get the dictionary
     info.get_dictionary()
@@ -31,7 +30,7 @@ def test_basic():
 def test_missing_label():
     """Test git repository with incorrect label"""
 
-    with TempDir() as _dir:
+    with TemporaryDirectory() as _dir:
 
         # initialize a git repo here
         repo = Repo.init(_dir)
@@ -41,13 +40,13 @@ def test_missing_label():
 
         # test for failure
         with pytest.raises(build_tools.NoCompatibleTagDefined):
-            info = build_tools.get_version_strings(_dir)
+            build_tools.get_version_strings(_dir)
 
 
 def test_correct_label():
     """Test git repository with a correct label"""
 
-    with TempDir() as _dir:
+    with TemporaryDirectory() as _dir:
 
         # initialize a git repo here
         repo = Repo.init(_dir)
@@ -68,4 +67,4 @@ def test_correct_label():
         repo[b'refs/tags/' + tag.name] = commit.id
 
         info = build_tools.get_version_strings(_dir)
-        assert(info.SHORT_VERSION == '1.2.3')
+        assert info.SHORT_VERSION == '1.2.3'

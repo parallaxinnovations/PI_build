@@ -1,41 +1,33 @@
-{ pkgs ? import <nixpkgs> {} }:
-with pkgs.python3Packages;
-buildPythonPackage rec {
+{ pkgs ? import <nixpkgs> {}, packages ? pkgs.python3Packages }:
+
+packages.buildPythonPackage rec {
   pname = "PI_build";
   version = "0.1.4";
 
-  src = ./. ;
-
-  preBuild = ''
-    echo '__version__ = "${version}"' > PI_build/__init__.py
-    export PACKAGE_VERSION="${version}"
-  '';
+  src = ./.;
+  format = "pyproject";
 
   nativeBuildInputs = [
-    pip
-    pkgs.git
-    dulwich
-    psutil
-  ];
-
-  doCheck = false;
-
-  buildInputs = [
-    dulwich
-    pip
-    psutil
-    setuptools
-    pkgs.git
+    packages.hatchling
+    packages.hatch-vcs
   ];
 
   propagatedBuildInputs = [
-    dulwich
-    psutil
+    packages.dulwich
+    packages.psutil
   ];
+
+  checkInputs = [
+    packages.pytestCheckHook
+    packages.pytest-cov
+    packages.pytest-asyncio
+  ];
+
+  doCheck = true;
 
   meta = with pkgs.lib; {
     description = "Parallax Innovations Build scripts";
-    homepage = "http://www.parallax-innovations.com";
+    homepage = "https://parallaxinnovations.github.io/PI_build/";
     license = licenses.bsd3;
     maintainers = [ "Jeremy Gill <jgill@parallax-innovations.com>" ];
   };
